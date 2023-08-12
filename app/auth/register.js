@@ -1,10 +1,12 @@
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
+import { StatusBar } from "native-base";
 
 const Register = () => {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#F5F5F5" />
       <View style={styles.hello}>
         <Text style={styles.started}>Let’s Get Started !</Text>
         <Text style={styles.log}>
@@ -19,7 +21,7 @@ const Register = () => {
               source={require("./regImg/user.png")}
             />
           </View>
-          <TextInput placeholder="Name" />
+          <TextInput placeholder="Name" width={255} />
         </View>
         <View style={styles.auth}>
           <View>
@@ -28,7 +30,7 @@ const Register = () => {
               source={require("./regImg/mail.png")}
             />
           </View>
-          <TextInput placeholder="E-Mail" />
+          <TextInput placeholder="E-Mail" width={255} />
         </View>
         <View style={styles.auth}>
           <View>
@@ -37,7 +39,7 @@ const Register = () => {
               source={require("./regImg/phone.png")}
             />
           </View>
-          <TextInput placeholder="Phone Number" />
+          <TextInput placeholder="Phone Number" width={255} />
         </View>
         <View style={styles.auth}>
           <View>
@@ -46,7 +48,7 @@ const Register = () => {
               source={require("./regImg/lock.png")}
             />
           </View>
-          <TextInput placeholder="Create New Password" />
+          <TextInput placeholder="Create New Password" width={255} secureTextEntry={true}  />
         </View>
         <View style={styles.auth}>
           <View>
@@ -55,7 +57,7 @@ const Register = () => {
               source={require("./regImg/unlock.png")}
             />
           </View>
-          <TextInput placeholder="New Password" />
+          <TextInput placeholder="New Password" width={255} secureTextEntry={true}  />
         </View>
       </View>
       <Link style={styles.regBtn} href="/auth/login">
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   authImg: {
-    margin: 20,
+    margin: 15,
   },
   regBtn: {
     backgroundColor: "#EFC81A",

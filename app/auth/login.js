@@ -1,58 +1,63 @@
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
+import { Input, NativeBaseProvider, StatusBar } from "native-base";
 
 const Login = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.profile}>
-        <Image source={require("./logImg/profile.png")} />
-      </View>
-      <View style={styles.hello}>
-        <Text style={styles.welcome}>Welcome !</Text>
-        <Text style={styles.log}>Log in to your exiting account.</Text>
-      </View>
-      <View>
-        <View style={styles.auth}>
-          <View>
-            <Image
-              style={styles.authImg}
-              source={require("./logImg/user.png")}
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="white" />
+        <View style={styles.profile}>
+          <Image source={require("./logImg/profile.png")} />
+        </View>
+        <View style={styles.hello}>
+          <Text style={styles.welcome}>Welcome !</Text>
+          <Text style={styles.log}>Log in to your exiting account.</Text>
+        </View>
+        <View>
+          <View style={styles.auth}>
+            <View>
+              <Image
+                style={styles.authImg}
+                source={require("./logImg/user.png")}
+              />
+            </View>
+            <TextInput placeholder="examplexxx@gmail.com" width={255} />
+          </View>
+          <View style={styles.auth}>
+            <View>
+              <Image
+                style={styles.authImg}
+                source={require("./logImg/lock.png")}
+              />
+            </View>
+            <TextInput
+              placeholder="Password"
+              width={255}
+              secureTextEntry={true}
             />
           </View>
-          <TextInput
-            style={{ color: "#EFC81A" }}
-            placeholder="examplexxx@gmail.com"
-          />
         </View>
-        <View style={styles.auth}>
-          <View>
-            <Image
-              style={styles.authImg}
-              source={require("./logImg/lock.png")}
-            />
-          </View>
-          <TextInput placeholder="Password" />
+        <View style={styles.forgotPass}>
+          <Link
+            style={{ fontSize: 12, fontWeight: 500, color: "#999999" }}
+            href=""
+          >
+            Forgot Password ?
+          </Link>
         </View>
-      </View>
-      <View style={styles.forgotPass}>
-        <Link
-          style={{ fontSize: 12, fontWeight: 500, color: "#999999" }}
-          href=""
-        >
-          Forgot Password ?
+        <Link style={styles.logBtn} href="/home">
+          <Text style={{ fontWeight: 900 }}>LOG IN</Text>
         </Link>
+        <Text style={{ color: "#999999" }}>
+          Don’t have an account?{" "}
+          <Link style={{ color: "#EFC81A" }} href="/auth/register">
+            Sign Up
+          </Link>
+        </Text>
       </View>
-      <Link style={styles.logBtn} href="/">
-        <Text style={{ fontWeight: 900 }}>LOG IN</Text>
-      </Link>
-      <Text style={{ color: "#999999" }}>
-        Don’t have an account?{" "}
-        <Link style={{ color: "#EFC81A" }} href="/auth/register">
-          Sign Up
-        </Link>
-      </Text>
-    </View>
+    </NativeBaseProvider>
   );
 };
 
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   authImg: {
-    margin: 20,
+    margin: 15,
   },
   forgotPass: {
     flexDirection: "row-reverse",

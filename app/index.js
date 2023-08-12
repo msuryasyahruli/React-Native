@@ -7,8 +7,10 @@ export default function Page() {
       <View style={styles.main}>
         <Text style={styles.title}>Hello World</Text>
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
-        <Link href="/auth/login">Login</Link>
-        <Link href="/auth/register">Register</Link>
+        <Link style={styles.btn} href="/auth/login">Login</Link>
+        <Link style={styles.btn} href="/auth/register">Register</Link>
+        <Link style={styles.btn} href="/home">home</Link>
+        <Link style={styles.btn} href="/profile">profile</Link>
       </View>
     </View>
   );
@@ -34,4 +36,13 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: "#38434D",
   },
+  btn:{
+    width: 300,
+    height: 30,
+    backgroundColor:"#EFC81A",
+    margin: 10,
+    textAlign: "center",
+    borderRadius: 20,
+    padding: 5
+  }
 });
