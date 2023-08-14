@@ -9,16 +9,16 @@ import {
 import React from "react";
 import { Link } from "expo-router";
 import { ScrollView, NativeBaseProvider } from "native-base";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 const home = () => {
   return (
     <NativeBaseProvider>
       <ScrollView>
         <View style={styles.container}>
-          <StatusBar backgroundColor="#F5F5F5" />
-          <Text style={{ marginTop: 30 }}>
+          <StatusBar backgroundColor="#F5F5F5" translucent={false} />
+          <Text>
             <View style={styles.auth}>
               <View>
                 <Image
@@ -26,7 +26,7 @@ const home = () => {
                   source={require("./homeImg/Vector.png")}
                 />
               </View>
-              <TextInput placeholder="Search Pasta, Bread, etc" />
+              <TextInput placeholder="Search Pasta, Bread, etc" width={280} />
             </View>
           </Text>
           <View style={{ marginTop: 20, marginBottom: 20 }}>
@@ -79,60 +79,6 @@ const home = () => {
               </Link>
             </View>
             <View>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 25,
-                  flexDirection: "row",
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <View>
-                  <Image
-                    style={{ margin: 10 }}
-                    source={require("./homeImg/salmon.png")}
-                  />
-                </View>
-                <View style={{ margin: 10 }}>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-                  >
-                    Teriyaki Salmon
-                  </Text>
-                  <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-                    spicy, salted
-                  </Text>
-                  <Text style={{ color: "#B6B6B6" }}>4.7</Text>
-                </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 25,
-                  flexDirection: "row",
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <View>
-                  <Image
-                    style={{ margin: 10 }}
-                    source={require("./homeImg/salmon.png")}
-                  />
-                </View>
-                <View style={{ margin: 10 }}>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-                  >
-                    Teriyaki Salmon
-                  </Text>
-                  <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-                    spicy, salted
-                  </Text>
-                  <Text style={{ color: "#B6B6B6" }}>4.7</Text>
-                </View>
-              </View>
               <View
                 style={{
                   backgroundColor: "white",

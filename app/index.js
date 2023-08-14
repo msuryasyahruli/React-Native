@@ -11,6 +11,7 @@ export default function Page() {
         <Link style={styles.btn} href="/auth/register">Register</Link>
         <Link style={styles.btn} href="/home">home</Link>
         <Link style={styles.btn} href="/profile">profile</Link>
+        <Link style={styles.btn} href="/CRUD/list">list</Link>
       </View>
     </View>
   );
