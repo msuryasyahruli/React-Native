@@ -6,30 +6,43 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "expo-router";
 import { ScrollView, NativeBaseProvider } from "native-base";
+import axios from "axios";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // const Tab = createBottomTabNavigator();
 const home = () => {
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes`)
+      .then((res) => {
+        setRecipes(res.data.data);
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <NativeBaseProvider>
+      <StatusBar backgroundColor="#f5f5f5" translucent={false} />
       <ScrollView>
-        <View style={styles.container}>
-          <StatusBar backgroundColor="#F5F5F5" translucent={false} />
-          <Text>
-            <View style={styles.auth}>
-              <View>
-                <Image
-                  style={styles.authImg}
-                  source={require("./homeImg/Vector.png")}
-                />
-              </View>
-              <TextInput placeholder="Search Pasta, Bread, etc" width={280} />
+        <View style={{ alignItems: "center", backgroundColor: "#f5f5f5" }}>
+          <View style={styles.search}>
+            <View>
+              <Image
+                style={styles.searchImg}
+                source={require("./homeImg/search.png")}
+              />
             </View>
-          </Text>
-          <View style={{ marginTop: 20, marginBottom: 20 }}>
+            <TextInput placeholder="Search Pasta, Bread, etc" width={280} />
+          </View>
+        </View>
+        <View style={styles.container}>
+          {/* <View style={{ marginTop: 20, marginBottom: 20 }}>
             <View style={{ width: 350 }}>
               <Text style={styles.title}>Popular for You</Text>
             </View>
@@ -53,19 +66,24 @@ const home = () => {
                 <Text style={{ textAlign: "center" }}>Dessert</Text>
               </View>
             </View>
-          </View>
+          </View> */}
           <View>
             <View style={{ width: 350 }}>
               <Text style={styles.title}>New Recipes</Text>
             </View>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <Image source={require("./homeImg/banana.png")} />
-            <Image source={require("./homeImg/sandwich.png")} />
-            <Image source={require("./homeImg/banana.png")} />
-            <Image source={require("./homeImg/sandwich.png")} />
+            {recipes.map((recipes) => (
+              <View style={{ marginLeft: 20, marginRight: 5 }}>
+                <Image
+                  style={{ marginTop: 10, marginBottom: 20, width: 130, height: 160, borderRadius: 16 }}
+                  source={{ uri: recipes.recipes_photo }}
+                />
+                <Text style={{ position: "absolute", bottom: 20, padding: 10, fontSize: 16, fontWeight: 700, color: "white" }}>{recipes.recipes_title}</Text>
+              </View>
+            ))}
           </ScrollView>
-          <View>
+          <View style={{ marginBottom: 20 }}>
             <View
               style={{
                 width: 350,
@@ -74,96 +92,64 @@ const home = () => {
               }}
             >
               <Text style={styles.title}>Popular Recipes</Text>
-              <Link href="" style={{ color: "#6D61F2" }}>
+              <Link href="/home/more" style={{ color: "#6D61F2" }}>
                 More info
               </Link>
             </View>
             <View>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 25,
-                  flexDirection: "row",
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <View>
-                  <Image
-                    style={{ margin: 10 }}
-                    source={require("./homeImg/salmon.png")}
-                  />
-                </View>
-                <View style={{ margin: 10 }}>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
+              {recipes.map((recipes) => (
+                <Link href={`/detail/${recipes.recipes_id}`} style={{ marginTop: 10, marginBottom: 5, }}>
+                  <View
+                    style={{
+                      backgroundColor: "white",
+                      width: 350,
+                      borderRadius: 15,
+                      flexDirection: "row",
+                      elevation: 2,
+                      shadowColor: 'black',
+                    }}
                   >
-                    Teriyaki Salmon
-                  </Text>
-                  <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-                    spicy, salted
-                  </Text>
-                  <Text style={{ color: "#B6B6B6" }}>4.7</Text>
-                </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 25,
-                  flexDirection: "row",
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <View>
-                  <Image
-                    style={{ margin: 10 }}
-                    source={require("./homeImg/salmon.png")}
-                  />
-                </View>
-                <View style={{ margin: 10 }}>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-                  >
-                    Teriyaki Salmon
-                  </Text>
-                  <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-                    spicy, salted
-                  </Text>
-                  <Text style={{ color: "#B6B6B6" }}>4.7</Text>
-                </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 25,
-                  flexDirection: "row",
-                  marginTop: 10,
-                  marginBottom: 10,
-                }}
-              >
-                <View>
-                  <Image
-                    style={{ margin: 10 }}
-                    source={require("./homeImg/salmon.png")}
-                  />
-                </View>
-                <View style={{ margin: 10 }}>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-                  >
-                    Teriyaki Salmon
-                  </Text>
-                  <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-                    spicy, salted
-                  </Text>
-                  <Text style={{ color: "#B6B6B6" }}>4.7</Text>
-                </View>
-              </View>
+                    <View>
+                      <Image
+                        style={{ margin: 10, width: 70, height: 70, borderRadius: 8 }}
+                        source={{ uri: recipes.recipes_photo }}
+                      />
+                    </View>
+                    <View style={{ marginTop: 10, width: 250 }}>
+                      <Text
+                        style={{ fontSize: 16, fontWeight: 500, marginBottom: 3 }}
+                      >
+                        {recipes.recipes_title}
+                      </Text>
+                      <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
+                        spicy, salted
+                      </Text>
+                      <Text style={{ color: "#B6B6B6" }}>4.7</Text>
+                    </View>
+                  </View>
+                </Link>
+              ))}
             </View>
           </View>
         </View>
       </ScrollView>
+      <View style={{ flexDirection: "row", position: "relative", height: 60, backgroundColor: "white", alignItems: "center", justifyContent: "center", elevation: 10, shadowColor: 'black' }}>
+        <Link href="/home">
+          <View padding={10} width={100} alignItems={"center"}>
+            <Image source={require("./navImg/home.png")} />
+          </View>
+        </Link>
+        <Link href="/upload">
+          <View padding={10} width={100} alignItems={"center"}>
+            <Image source={require("./navImg/plus-square.png")} />
+          </View>
+        </Link>
+        <Link href="/profile">
+          <View padding={10} width={100} alignItems={"center"}>
+            <Image source={require("./navImg/user.png")} />
+          </View>
+        </Link>
+      </View>
     </NativeBaseProvider>
   );
 };
@@ -176,17 +162,19 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: "#F5F5F5",
   },
-  auth: {
+  search: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#EFEFEF",
     width: 350,
-    height: 60,
+    height: 50,
     borderRadius: 15,
     margin: 10,
   },
-  authImg: {
+  searchImg: {
     margin: 20,
+    width: 20,
+    height: 20
   },
   title: {
     fontSize: 18,

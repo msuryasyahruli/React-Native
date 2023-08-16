@@ -1,19 +1,63 @@
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import React from "react";
 import { Link } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Input, NativeBaseProvider, StatusBar } from "native-base";
 
 export default function Page() {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-        <Link style={styles.btn} href="/auth/login">Login</Link>
-        <Link style={styles.btn} href="/auth/register">Register</Link>
-        <Link style={styles.btn} href="/home">home</Link>
-        <Link style={styles.btn} href="/profile">profile</Link>
-        <Link style={styles.btn} href="/CRUD/list">list</Link>
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="white" />
+        <View style={styles.profile}>
+          <Image source={require("./auth/logImg/profile.png")} />
+        </View>
+        <View style={styles.hello}>
+          <Text style={styles.welcome}>Welcome !</Text>
+          <Text style={styles.log}>Log in to your exiting account.</Text>
+        </View>
+        <View>
+          <View style={styles.auth}>
+            <View>
+              <Image
+                style={styles.authImg}
+                source={require("./auth/logImg/user.png")}
+              />
+            </View>
+            <TextInput placeholder="examplexxx@gmail.com" width={255} />
+          </View>
+          <View style={styles.auth}>
+            <View>
+              <Image
+                style={styles.authImg}
+                source={require("./auth/logImg/lock.png")}
+              />
+            </View>
+            <TextInput
+              placeholder="Password"
+              width={255}
+              secureTextEntry={true}
+            />
+          </View>
+        </View>
+        <View style={styles.forgotPass}>
+          <Link
+            style={{ fontSize: 12, fontWeight: 500, color: "#999999" }}
+            href=""
+          >
+            Forgot Password ?
+          </Link>
+        </View>
+        <Link style={styles.logBtn} href="/home">
+          <Text style={{ fontWeight: 900 }}>LOG IN</Text>
+        </Link>
+        <Text style={{ color: "#999999" }}>
+          Don’t have an account?{" "}
+          <Link style={{ color: "#EFC81A" }} href="/auth/register">
+            Sign Up
+          </Link>
+        </Text>
       </View>
-    </View>
+    </NativeBaseProvider>
   );
 }
 
@@ -21,29 +65,57 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
     justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
   },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
+  profile: {
+    backgroundColor: "#C4C4C4",
+    width: 180,
+    height: 180,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+  hello: {
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  btn:{
-    width: 300,
-    height: 30,
-    backgroundColor:"#EFC81A",
+  welcome: {
+    color: "#EFC81A",
+    fontWeight: 500,
+    fontSize: 18,
+  },
+  log: {
+    color: "#C4C4C4",
+    fontWeight: 500,
+    fontSize: 12,
+  },
+  auth: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F5F5F5",
+    width: 319,
+    height: 60,
+    borderRadius: 10,
     margin: 10,
+  },
+  authImg: {
+    margin: 15,
+  },
+  forgotPass: {
+    flexDirection: "row-reverse",
+    width: 319,
+  },
+  logBtn: {
+    backgroundColor: "#EFC81A",
+    width: 319,
+    height: 60,
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    color: "#fff",
     textAlign: "center",
-    borderRadius: 20,
-    padding: 5
-  }
+    marginTop: 30,
+    padding: 20,
+  },
 });

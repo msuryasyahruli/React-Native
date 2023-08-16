@@ -3,14 +3,14 @@ import React from "react";
 import { StatusBar } from "native-base";
 import { Link } from "expo-router";
 
-const index = () => {
+const edit = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" translucent={false} />
       <View style={styles.header}>
         <Link href="/profile">
           <View style={styles.backbtn}>
-            <Image source={require("./EPimg/Vector.png")} />
+            <Image source={require("./MRimg/Vector.png")} />
           </View>
         </Link>
         <Text style={{ fontSize: 20, fontWeight: 700, color: "#EEC302", marginLeft: 80 }}>Edit Profile</Text>
@@ -27,7 +27,7 @@ const index = () => {
   );
 };
 
-export default index;
+export default edit;
 
 const styles = StyleSheet.create({
   container: {
