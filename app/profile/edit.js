@@ -1,20 +1,11 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { StatusBar } from "native-base";
-import { Link } from "expo-router";
 
-const edit = () => {
+const Edit = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" translucent={false} />
-      <View style={styles.header}>
-        <Link href="/profile">
-          <View style={styles.backbtn}>
-            <Image source={require("./MRimg/Vector.png")} />
-          </View>
-        </Link>
-        <Text style={{ fontSize: 20, fontWeight: 700, color: "#EEC302", marginLeft: 80 }}>Edit Profile</Text>
-      </View>
       <View style={{ width: 350, paddingTop: 15, paddingBottom: 15 }}>
         <Text style={{ fontSize: 16, fontWeight: 500 }}>Change Profile Picture</Text>
       </View>
@@ -27,7 +18,7 @@ const edit = () => {
   );
 };
 
-export default edit;
+export default Edit;
 
 const styles = StyleSheet.create({
   container: {
@@ -35,12 +26,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 10,
     backgroundColor: "#fff",
-  },
-  header: {
-    width: 350,
-    flexDirection: "row",
-    alignItems: "center",
-    margin: 10
   },
   backbtn: {
     width: 50,

@@ -1,29 +1,11 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { StatusBar } from "native-base";
-import { Link } from "expo-router";
 
-const liked = () => {
+const Liked = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" translucent={false} />
-      <View style={styles.header}>
-        <Link href="/profile">
-          <View style={styles.backbtn}>
-            <Image source={require("./MRimg/Vector.png")} />
-          </View>
-        </Link>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 700,
-            color: "#EEC302",
-            marginLeft: 85,
-          }}
-        >
-          Liked Recipe
-        </Text>
-      </View>
       <View
         style={{
           backgroundColor: "white",
@@ -31,23 +13,17 @@ const liked = () => {
           flexDirection: "row",
           marginTop: 10,
           marginBottom: 10,
-          width: 350
+          width: 350,
         }}
       >
         <View>
-          <Image
-            source={require("./MRimg/margherita.png")}
-          />
+          <Image source={require("./MRimg/margherita.png")} />
         </View>
         <View style={{ margin: 10 }}>
-          <Text
-            style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-          >
+          <Text style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}>
             Margherita
           </Text>
-          <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-            In Veg Pizza
-          </Text>
+          <Text style={{ color: "#B6B6B6", fontSize: 12 }}>In Veg Pizza</Text>
           <Text>Spicy</Text>
         </View>
       </View>
@@ -58,23 +34,17 @@ const liked = () => {
           flexDirection: "row",
           marginTop: 10,
           marginBottom: 10,
-          width: 350
+          width: 350,
         }}
       >
         <View>
-          <Image
-            source={require("./MRimg/vegloaded.png")}
-          />
+          <Image source={require("./MRimg/vegloaded.png")} />
         </View>
         <View style={{ margin: 10 }}>
-          <Text
-            style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}
-          >
+          <Text style={{ fontSize: 16, fontWeight: 500, marginBottom: 10 }}>
             Veg Loaded
           </Text>
-          <Text style={{ color: "#B6B6B6", fontSize: 12 }}>
-            In Pizza Mania
-          </Text>
+          <Text style={{ color: "#B6B6B6", fontSize: 12 }}>In Pizza Mania</Text>
           <Text>Spicy</Text>
         </View>
       </View>
@@ -82,7 +52,7 @@ const liked = () => {
   );
 };
 
-export default liked;
+export default Liked;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,13 +1,80 @@
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { Link } from "expo-router";
-import { Input, NativeBaseProvider, StatusBar } from "native-base";
+import { Button, NativeBaseProvider } from "native-base";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        const userToken = await AsyncStorage.getItem("token");
+        if (userToken) {
+          navigation.navigate("home"); 
+        }
+      } catch (error) {
+        console.error("Error checking user token:", error);
+      }
+    };
+    checkToken();
+  }, [navigation]);
+
+  // useEffect(() => {
+  //   getToken();
+  // }, []);
+
+  // const getToken = async () => {
+  //   const dataUser = await AsyncStorage.getItem("token");
+  //   if (!dataUser) {
+  //     navigation.navigate("login");
+  //   } else {
+  //     navigation.navigate("home");
+  //     getToken();
+  //   }
+  // };
+
+  const login = async () => {
+    const data = {
+      users_email: email,
+      users_confirmpassword: confirmpassword,
+    };
+    // console.log(data);
+    axios
+      .post("http://192.168.22.142:7474/users/login", data)
+      .then((res) => {
+        // console.log(data);
+        if (res.status === 201) {
+          navigation.navigate("home");
+          AsyncStorage.setItem("token", res.data.data.token_user);
+          AsyncStorage.setItem("users_id", res.data.data.users_id);
+        } else if (res.data.message === "Email Wrong") {
+          alert("Email Wrong");
+        } else if (res.data.message === "Password Wrong") {
+          alert("Password Wrong");
+        }
+        setEmail("");
+        setConfirmPassword("");
+      });
+  };
+
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <StatusBar backgroundColor="white" />
         <View style={styles.profile}>
           <Image source={require("./logImg/profile.png")} />
         </View>
@@ -23,7 +90,12 @@ const Login = () => {
                 source={require("./logImg/user.png")}
               />
             </View>
-            <TextInput placeholder="examplexxx@gmail.com" width={255} />
+            <TextInput
+              placeholder="examplexxx@gmail.com"
+              width={255}
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
           </View>
           <View style={styles.auth}>
             <View>
@@ -36,6 +108,8 @@ const Login = () => {
               placeholder="Password"
               width={255}
               secureTextEntry={true}
+              value={confirmpassword}
+              onChangeText={(value) => setConfirmPassword(value)}
             />
           </View>
         </View>
@@ -47,14 +121,32 @@ const Login = () => {
             Forgot Password ?
           </Link>
         </View>
-        <Link style={styles.logBtn} href="/home">
+        <Button
+          width={320}
+          height={50}
+          borderRadius={10}
+          backgroundColor={"#EFC81A"}
+          margin={5}
+          onPress={login}
+        >
+          LOG IN
+        </Button>
+        {/* <Link style={styles.logBtn} href="/home">
           <Text style={{ fontWeight: 900 }}>LOG IN</Text>
-        </Link>
+        </Link> */}
         <Text style={{ color: "#999999" }}>
           Don’t have an account?{" "}
-          <Link style={{ color: "#EFC81A" }} href="/auth/register">
+          <TouchableOpacity>
+            <Text
+              style={{ color: "#EFC81A" }}
+              onPress={() => navigation.navigate("register")}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+          {/* <Link href="/auth/register">
             Sign Up
-          </Link>
+          </Link> */}
         </Text>
       </View>
     </NativeBaseProvider>
@@ -68,6 +160,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
   },
   profile: {
     backgroundColor: "#C4C4C4",

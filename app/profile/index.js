@@ -1,91 +1,244 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { NativeBaseProvider, StatusBar } from "native-base";
-import { Link } from "expo-router";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, HStack, NativeBaseProvider, StatusBar } from "native-base";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
-const index = () => {
+const Profile = () => {
+  const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const isFocus = useIsFocused();
+
+  useEffect(() => {
+    if (isFocus) {
+      getData();
+    }
+  }, []);
+
+  const getData = async () => {
+    const userId = await AsyncStorage.getItem("users_id");
+    await axios
+      .get(`http://192.168.22.142:7474/users/profile/${userId}`)
+      .then((response) => {
+        setData(response.data.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <StatusBar backgroundColor="#EEC302" translucent={false} />
-        <View style={styles.profileImg}>
-          <View style={styles.profile}>
-            <Image style={{ padding: 20 }} source={require("./profImg/user.png")} />
-          </View>
-          <Text
-            style={{ padding: 20, fontWeight: 700, color: "white", fontSize: 18 }}
-          >
-            Name
-          </Text>
+        <StatusBar backgroundColor="#EEC302" />
+        <View style={styles.profile}>
+          <FlatList
+            data={data}
+            renderItem={({ item }) => (
+              <View>
+                <View style={styles.profileImg}>
+                  <Image
+                    style={{
+                      width: 120,
+                      height: 120,
+                      borderRadius: 50,
+                    }}
+                    source={require("./profImg/user.png")}
+                  />
+                </View>
+                <HStack alignSelf="center">
+                  <Text mt={1} style={{ color: "#FFFFFF", fontSize: 22 }}>
+                    {" "}
+                    {item.users_name}
+                  </Text>
+                </HStack>
+              </View>
+            )}
+          />
         </View>
         <View style={styles.allmenu}>
-          <Link href="/profile/edit">
+          <TouchableOpacity>
+            <Text onPress={() => navigation.navigate("editProf")}>
+              <View style={styles.menu}>
+                <Image
+                  style={{ margin: 10 }}
+                  source={require("./profImg/user.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#000000B2",
+                    margin: 10,
+                  }}
+                >
+                  Edit Profile
+                </Text>
+              </View>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress={() => navigation.navigate("myrecipe")}>
+              <View style={styles.menu}>
+                <Image
+                  style={{ margin: 10 }}
+                  source={require("./profImg/award.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#000000B2",
+                    margin: 10,
+                  }}
+                >
+                  My Recipe
+                </Text>
+              </View>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress={() => navigation.navigate("saved")}>
+              <View style={styles.menu}>
+                <Image
+                  style={{ margin: 10 }}
+                  source={require("./profImg/saved.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#000000B2",
+                    margin: 10,
+                  }}
+                >
+                  Saved Recipe
+                </Text>
+              </View>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text onPress={() => navigation.navigate("liked")}>
+              <View style={styles.menu}>
+                <Image
+                  style={{ margin: 12 }}
+                  source={require("./profImg/liked.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#000000B2",
+                    margin: 10,
+                  }}
+                >
+                  Liked Recipe
+                </Text>
+              </View>
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
             <View style={styles.menu}>
-              <Image style={{ margin: 10 }} source={require("./profImg/user.png")} />
-              <Text style={{ fontSize: 14, fontWeight: 500, color: "#000000B2", margin: 10 }}>Edit Profile</Text>
+              <Image
+                style={{ margin: 12, width: 20, height: 20 }}
+                source={require("./profImg/logout.png")}
+              />
+              <Text
+                onPress={() => {
+                  Alert.alert(
+                    "Logout",
+                    "Are you sure you want to log out ?",
+                    [
+                      {
+                        text: "Cancel",
+                        style: "cancel",
+                      },
+                      {
+                        text: "Ok",
+                        onPress: () => {
+                          AsyncStorage.clear();
+                          navigation.navigate("login");
+                        },
+                        style: "cancel",
+                      },
+                    ],
+                    {
+                      cancelable: true,
+                    }
+                  );
+                }}
+                style={{
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: "#000000B2",
+                  margin: 10,
+                }}
+              >
+                Logout
+              </Text>
             </View>
-          </Link>
-          <Link href="/profile/myrecipe">
-            <View style={styles.menu}>
-              <Image style={{ margin: 10 }} source={require("./profImg/award.png")} />
-              <Text style={{ fontSize: 14, fontWeight: 500, color: "#000000B2", margin: 10 }}>My Recipe</Text>
-            </View>
-          </Link>
-          <Link href="/profile/saved">
-            <View style={styles.menu}>
-              <Image style={{ margin: 10 }} source={require("./profImg/saved.png")} />
-              <Text style={{ fontSize: 14, fontWeight: 500, color: "#000000B2", margin: 10 }}>Saved Recipe</Text>
-            </View>
-          </Link>
-          <Link href="/profile/liked">
-            <View style={styles.menu}>
-              <Image style={{ margin: 12 }} source={require("./profImg/liked.png")} />
-              <Text style={{ fontSize: 14, fontWeight: 500, color: "#000000B2", margin: 10 }}>Liked Recipe</Text>
-            </View>
-          </Link>
-          <View style={styles.menu}>
-            <Image style={{ margin: 12, width: 20, height: 20 }} source={require("./profImg/logout.png")} />
-            <Text style={{ fontSize: 14, fontWeight: 500, color: "#000000B2", margin: 10 }}>Logout</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={{
-        flexDirection: "row", position: "relative", height: 60, backgroundColor: "white", alignItems: "center", justifyContent: "center", elevation: 10, shadowColor: 'black' }}>
-        <Link href="/home">
-          <View padding={10} width={100} alignItems={"center"}>
-            <Image source={require("./navImg/home.png")} />
-          </View>
-        </Link>
-        <Link href="/upload">
-          <View padding={10} width={100} alignItems={"center"}>
-            <Image source={require("./navImg/plus-square.png")} />
-          </View>
-        </Link>
-        <Link href="/profile">
-          <View padding={10} width={100} alignItems={"center"}>
-            <Image source={require("./navImg/user.png")} />
-          </View>
-        </Link>
+      <View
+        style={{
+          flexDirection: "row",
+          position: "relative",
+          height: 60,
+          backgroundColor: "white",
+          alignItems: "center",
+          justifyContent: "center",
+          elevation: 10,
+          shadowColor: "black",
+        }}
+      >
+        <TouchableOpacity>
+          <Text onPress={() => navigation.navigate("home")}>
+            <View padding={10} width={100} alignItems={"center"}>
+              <Image source={require("./navImg/home.png")} />
+            </View>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text onPress={() => navigation.navigate("upload")}>
+            <View padding={10} width={100} alignItems={"center"}>
+              <Image source={require("./navImg/plus-square.png")} />
+            </View>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text onPress={() => navigation.navigate("profile")}>
+            <View padding={10} width={100} alignItems={"center"}>
+              <Image source={require("./navImg/user.png")} />
+            </View>
+          </Text>
+        </TouchableOpacity>
       </View>
     </NativeBaseProvider>
   );
 };
 
-export default index;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
   },
-  profileImg: {
+  profile: {
     backgroundColor: "#EEC302",
     height: 320,
     width: 393,
-    justifyContent: "center",
+    paddingTop: 50,
     alignItems: "center",
   },
-  profile: {
+  profileImg: {
     backgroundColor: "#fff",
     width: 120,
     height: 120,
@@ -101,11 +254,11 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     top: -50,
     elevation: 3,
-    shadowColor: 'black',
+    shadowColor: "black",
   },
   menu: {
     padding: 10,
     flexDirection: "row",
     alignItems: "center",
-  }
+  },
 });

@@ -6,11 +6,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const more = () => {
+const More = () => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes`)
+      .get(`http://192.168.22.142:7474/recipes`)
       .then((res) => {
         setRecipes(res.data.data);
         // console.log(res.data.data);
@@ -23,13 +23,13 @@ const more = () => {
     <NativeBaseProvider>
       <View style={styles.container}>
         <StatusBar backgroundColor="#fff" translucent={false} />
-        <View style={styles.header}>
-          <Link href="/home">
+        {/* <View style={styles.header}> */}
+          {/* <Link href="/home">
             <View style={styles.backbtn}>
               <Image source={require("./homeImg/back.png")} />
             </View>
-          </Link>
-          <Text
+          </Link> */}
+          {/* <Text
             style={{
               fontSize: 20,
               fontWeight: 700,
@@ -38,16 +38,16 @@ const more = () => {
             }}
           >
             Popular Menu
-          </Text>
-        </View>
-        <ScrollView>
-          <View style={{ width: 395, alignItems: "center", paddingBottom: 20 }}>
+          </Text> */}
+        {/* </View> */}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ width: '100%', alignItems: "center", paddingBottom: 20 }}>
             {recipes.map((recipes) => (
               <View
                 style={{
                   borderRadius: 25,
                   flexDirection: "row",
-                  marginTop: 10,
+                  marginTop: 0,
                   marginBottom: 10,
                   width: 360,
                 }}
@@ -82,20 +82,21 @@ const more = () => {
   );
 };
 
-export default more;
+export default More;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     paddingTop: 10,
+    backgroundColor: "#fff",
   },
-  header: {
-    width: 350,
-    flexDirection: "row",
-    alignItems: "center",
-    margin: 10
-  },
+  // header: {
+  //   width: 350,
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   margin: 10
+  // },
   backbtn: {
     width: 50,
     height: 50,

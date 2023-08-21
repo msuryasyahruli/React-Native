@@ -1,19 +1,27 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Button, NativeBaseProvider, ScrollView, StatusBar, TextArea } from "native-base";
-import { Link, useSearchParams } from "expo-router";
+import {
+  Button,
+  NativeBaseProvider,
+  ScrollView,
+  StatusBar,
+  TextArea,
+} from "native-base";
 import axios from "axios";
+import { useRoute } from "@react-navigation/native";
 
-const index = () => {
+const Detail = () => {
+  const route = useRoute();
+  const { recipes_id } = route.params;
   const [activeTab, setActiveTab] = useState("Ingredients");
+  const [recipes, setRecipes] = useState([]);
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
-  const { id } = useSearchParams();
-  const [recipes, setRecipes] = useState([]);
+
   useEffect(() => {
     axios
-      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes/${id}`)
+      .get(`http://192.168.22.142:7474/recipes/${recipes_id}`)
       .then((res) => {
         setRecipes(res.data.data[0]);
         // console.log(res.data.data[0]);
@@ -21,12 +29,12 @@ const index = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [recipes_id]);
 
   const [comments, setComments] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://wild-tan-dog-kilt.cyclic.app/comments`)
+      .get(`http://192.168.22.142:7474/comments`)
       .then((res) => {
         setComments(res.data.data);
         // console.log(res.data.data);
@@ -38,102 +46,144 @@ const index = () => {
 
   return (
     <NativeBaseProvider>
-      <View style={styles.container}>
-        <StatusBar backgroundColor="transparent" />
-        <View style={{ width: 400, height: 400 }}>
-          <Image
-            style={{ width: '100%', height: '110%' }}
-            source={{ uri: recipes.recipes_photo }}
-          />
-          <Link href="/home" style={{ position: "absolute", margin: 20, top: 30 }}>
-            <View>
-              <Image source={require("./detail.img/back.png")} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <StatusBar backgroundColor="transparent" translucent={true} />
+          <View style={{ width: "100%", height: 300 }}>
+            <Image
+              style={{ width: "100%", height: "110%" }}
+              source={{ uri: recipes.recipes_photo }}
+            />
+            <View
+              style={{
+                position: "absolute",
+                left: 20,
+                bottom: 30,
+                width: "75%",
+              }}
+            >
+              <Text style={{ color: "white", fontSize: 34, fontWeight: 700 }}>
+                {recipes.recipes_title}
+              </Text>
+              <Text
+                style={{
+                  color: "#B0B0B0",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  marginTop: 5,
+                }}
+              >
+                By Chef Ronald Humson
+              </Text>
             </View>
-          </Link>
-          <View style={{ position: "absolute", left: 20, bottom: 30, width: '75%' }}>
-            <Text style={{ color: "white", fontSize: 34, fontWeight: 700 }}>{recipes.recipes_title}</Text>
-            <Text style={{ color: "#B0B0B0", fontSize: 14, fontWeight: 400, marginTop: 5 }}>By Chef Ronald Humson</Text>
-          </View>
-          <View style={{ position: "absolute", right: 20, bottom: 30, width: '25%', flexDirection: "row-reverse" }}>
-            <Image style={{ margin: 5 }} source={require("./detail.img/liked.png")} />
-            <Image style={{ margin: 5 }} source={require("./detail.img/saved.png")} />
-          </View>
-        </View>
-        <View style={styles.recipe}>
-          <View style={styles.tabsContainer}>
-            <TouchableOpacity
-              style={[
-                styles.tabButton,
-                activeTab === "Ingredients" && styles.activeTab,
-              ]}
-              onPress={() => handleTabChange("Ingredients")}
+            <View
+              style={{
+                position: "absolute",
+                right: 20,
+                bottom: 30,
+                width: "25%",
+                flexDirection: "row-reverse",
+              }}
             >
-              <Text
-                style={[
-                  styles.tabText,
-                  activeTab === "Ingredients" && styles.activeTabText,
-                ]}
-              >
-                Ingredients
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.tabButton,
-                activeTab === "StepVideo" && styles.activeTab,
-              ]}
-              onPress={() => handleTabChange("StepVideo")}
-            >
-              <Text
-                style={[
-                  styles.tabText,
-                  activeTab === "StepVideo" && styles.activeTabText,
-                ]}
-              >
-                Video Step
-              </Text>
-            </TouchableOpacity>
+              <Image
+                style={{ margin: 5 }}
+                source={require("./detail.img/liked.png")}
+              />
+              <Image
+                style={{ margin: 5 }}
+                source={require("./detail.img/saved.png")}
+              />
+            </View>
           </View>
-          {activeTab === "Ingredients" && (
-            <View style={styles.tabContent}>
-              <View style={styles.Ingredients}>
-                <Text style={{ padding: 20, fontSize: 14 }}>
-                  {recipes.recipes_ingredients}
+          <View style={styles.recipe}>
+            <View style={styles.tabsContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.tabButton,
+                  activeTab === "Ingredients" && styles.activeTab,
+                ]}
+                onPress={() => handleTabChange("Ingredients")}
+              >
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === "Ingredients" && styles.activeTabText,
+                  ]}
+                >
+                  Ingredients
                 </Text>
-              </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.tabButton,
+                  activeTab === "StepVideo" && styles.activeTab,
+                ]}
+                onPress={() => handleTabChange("StepVideo")}
+              >
+                <Text
+                  style={[
+                    styles.tabText,
+                    activeTab === "StepVideo" && styles.activeTabText,
+                  ]}
+                >
+                  Video Step
+                </Text>
+              </TouchableOpacity>
             </View>
-          )}
-          <ScrollView>
-            {activeTab === "StepVideo" && (
+            {activeTab === "Ingredients" && (
               <View style={styles.tabContent}>
-                <View style={styles.StepVideo}>
-                  <Image style={{ margin: 10 }} source={require("./detail.img/video.png")} />
-                  <Text style={{ margin: 10, fontSize: 14, width: 270 }}>
-                    {recipes.recipes_video}
+                <View style={styles.Ingredients}>
+                  <Text style={{ padding: 20, fontSize: 14 }}>
+                    {recipes.recipes_ingredients}
                   </Text>
-                </View>
-                <View style={styles.cmd}>
-                  <TextArea borderRadius={15} h={40} placeholder="Comment :" />
-                </View>
-                <Button width={365} height={50} borderRadius={15} backgroundColor={"#EFC81A"} margin={5}>Upload</Button>
-                <View style={{ width: 350 }}>
-                  <Text>Comment :</Text>
-                  {comments.map((comments) => (
-                    <Text marginBottom={10}>
-                      {comments.comment_text}
-                    </Text>
-                  ))}
                 </View>
               </View>
             )}
-          </ScrollView>
+            <View>
+              {activeTab === "StepVideo" && (
+                <View style={styles.tabContent}>
+                  <View style={styles.StepVideo}>
+                    <Image
+                      style={{ margin: 10 }}
+                      source={require("./detail.img/video.png")}
+                    />
+                    <Text style={{ margin: 10, fontSize: 14, width: 270 }}>
+                      {recipes.recipes_video}
+                    </Text>
+                  </View>
+                  <View style={styles.cmd}>
+                    <TextArea
+                      borderRadius={15}
+                      h={40}
+                      placeholder="Comment :"
+                    />
+                  </View>
+                  <Button
+                    width={365}
+                    height={50}
+                    borderRadius={15}
+                    backgroundColor={"#EFC81A"}
+                    margin={5}
+                  >
+                    Upload
+                  </Button>
+                  <View style={{ width: 350 }}>
+                    <Text>Comment :</Text>
+                    {comments.map((comments) => (
+                      <Text marginBottom={10}>{comments.comment_text}</Text>
+                    ))}
+                  </View>
+                </View>
+              )}
+            </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </NativeBaseProvider>
   );
 };
 
-export default index;
+export default Detail;
 
 const styles = StyleSheet.create({
   container: {
@@ -143,11 +193,11 @@ const styles = StyleSheet.create({
   },
   recipe: {
     backgroundColor: "white",
-    width: '100%',
+    width: "100%",
     height: 600,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
-    padding: 5
+    padding: 5,
   },
   tabsContainer: {
     flexDirection: "row",
@@ -157,7 +207,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
     marginHorizontal: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
   activeTab: {
     borderBottomColor: "#EEC302",
@@ -170,31 +220,31 @@ const styles = StyleSheet.create({
   },
   activeTabText: {
     fontSize: 16,
-    color: "black",
+    color: "#EEC302",
     fontWeight: "bold",
   },
   tabContent: {
     alignItems: "center",
-    paddingTop: 20
+    paddingTop: 20,
   },
   Ingredients: {
     width: 365,
-    height: 'auto',
+    height: "auto",
     backgroundColor: "#FAF7ED",
-    borderRadius: 15
+    borderRadius: 15,
   },
   StepVideo: {
     backgroundColor: "#FAF7ED",
     width: 365,
     flexDirection: "row",
     marginBottom: 10,
-    borderRadius: 15
+    borderRadius: 15,
   },
   cmd: {
-    width: '100%',
+    width: "100%",
     backgroundColor: "#FAF7ED",
     width: 365,
     borderRadius: 15,
-    marginTop: 20
+    marginTop: 20,
   },
 });
