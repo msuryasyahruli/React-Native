@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  useWindowDimensions,
 } from "react-native";
 import React from "react";
 import { Button, FlatList, NativeBaseProvider, StatusBar } from "native-base";
@@ -20,7 +19,6 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 const Myrecipe = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  // const [userLogin, setUserLogin] = useState();
 
   useEffect(() => {
     getData();
@@ -29,7 +27,7 @@ const Myrecipe = () => {
   const getData = async () => {
     const dataUser = await AsyncStorage.getItem("users_id");
     await axios
-      .get(`http://192.168.22.142:7474/recipes/users/${dataUser}`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes/users/${dataUser}`)
       .then((response) => {
         setData(response.data.data);
       })

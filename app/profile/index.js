@@ -26,7 +26,7 @@ const Profile = () => {
   const getData = async () => {
     const userId = await AsyncStorage.getItem("users_id");
     await axios
-      .get(`http://192.168.22.142:7474/users/profile/${userId}`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/users/profile/${userId}`)
       .then((response) => {
         setData(response.data.data);
       })

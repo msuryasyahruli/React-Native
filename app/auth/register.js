@@ -21,7 +21,7 @@ const Register = () => {
       users_confirmpassword: confirmPassword,
     };
     console.log(data);
-    axios.post("http://192.168.22.142:7474/users/register", data)
+    axios.post("https://wild-tan-dog-kilt.cyclic.app/users/register", data)
     .then((res) => {
       console.log(res.data);
       setName("");

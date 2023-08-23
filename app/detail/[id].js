@@ -21,7 +21,7 @@ const Detail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.22.142:7474/recipes/${recipes_id}`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes/${recipes_id}`)
       .then((res) => {
         setRecipes(res.data.data[0]);
         // console.log(res.data.data[0]);
@@ -34,7 +34,7 @@ const Detail = () => {
   const [comments, setComments] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://192.168.22.142:7474/comments`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/comments`)
       .then((res) => {
         setComments(res.data.data);
         // console.log(res.data.data);

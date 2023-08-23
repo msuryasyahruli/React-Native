@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { StackActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -34,28 +34,13 @@ const Login = () => {
     checkToken();
   }, [navigation]);
 
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
-
-  // const getToken = async () => {
-  //   const dataUser = await AsyncStorage.getItem("token");
-  //   if (!dataUser) {
-  //     navigation.navigate("login");
-  //   } else {
-  //     navigation.navigate("home");
-  //     getToken();
-  //   }
-  // };
-
   const login = async () => {
     const data = {
       users_email: email,
       users_confirmpassword: confirmpassword,
     };
-    // console.log(data);
     axios
-      .post("http://192.168.22.142:7474/users/login", data)
+      .post("https://wild-tan-dog-kilt.cyclic.app/users/login", data)
       .then((res) => {
         // console.log(data);
         if (res.status === 201) {

@@ -22,32 +22,7 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Upload = () => {
-  // const [title, setTitle] = useState("");
-  // const [ingredients, setIngredients] = useState("");
-  // const [video, setVideo] = useState("");
-  // const [photo, setPhoto] = useState("");
-  // const [usersId, setUsersId] = useState("");
   const navigation = useNavigation();
-
-  // const upload = () => {
-  //   const data = {
-  //     recipes_title: title,
-  //     recipes_ingredients: ingredients,
-  //     recipes_video: video,
-  //     recipes_photo: photo,
-  //     users_id: usersId,
-  //   };
-  //   console.log(data);
-  //   axios.post("http://192.168.22.142:7474/recipes", data)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setTitle("");
-  //       setIngredients("");
-  //       setVideo("");
-  //       setPhoto("");
-  //       setUsersId("");
-  //     });
-  // };
 
   const dispatch = useDispatch();
   const [userLogin, setUserLogin] = useState();

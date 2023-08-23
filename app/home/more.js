@@ -1,6 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
 import { NativeBaseProvider, ScrollView, StatusBar } from "native-base";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -10,7 +9,7 @@ const More = () => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://192.168.22.142:7474/recipes`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes`)
       .then((res) => {
         setRecipes(res.data.data);
         // console.log(res.data.data);
@@ -23,23 +22,6 @@ const More = () => {
     <NativeBaseProvider>
       <View style={styles.container}>
         <StatusBar backgroundColor="#fff" translucent={false} />
-        {/* <View style={styles.header}> */}
-          {/* <Link href="/home">
-            <View style={styles.backbtn}>
-              <Image source={require("./homeImg/back.png")} />
-            </View>
-          </Link> */}
-          {/* <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 700,
-              color: "#EEC302",
-              marginLeft: 70,
-            }}
-          >
-            Popular Menu
-          </Text> */}
-        {/* </View> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ width: '100%', alignItems: "center", paddingBottom: 20 }}>
             {recipes.map((recipes) => (
@@ -91,12 +73,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: "#fff",
   },
-  // header: {
-  //   width: 350,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   margin: 10
-  // },
   backbtn: {
     width: 50,
     height: 50,

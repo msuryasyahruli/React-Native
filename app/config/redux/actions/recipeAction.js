@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllRecipe = () => async (dispatch) => {
   try {
-    const recipes = await axios.get(`http://192.168.22.142:7474/recipes/`);
+    const recipes = await axios.get(`https://wild-tan-dog-kilt.cyclic.app/recipes/`);
     const result = recipes.data.data;
     dispatch({ type: "GET_ALL_RECIPE", payload: result });
   } catch (err) {
@@ -26,7 +26,7 @@ export const createRecipeActions =
         });
       }
       const recipes = await axios.post(
-        "http://192.168.22.142:7474/recipes/",
+        "https://wild-tan-dog-kilt.cyclic.app/recipes/",
         formData,
         {
           headers: {
@@ -61,7 +61,7 @@ export const updateRecipeActions =
         });
       }
       const recipes = await axios.put(
-        `http://192.168.22.142:7474/recipes/${recipes_id}`,
+        `https://wild-tan-dog-kilt.cyclic.app/recipes/${recipes_id}`,
         formData,
         {
           headers: {
@@ -84,7 +84,7 @@ export const updateRecipeActions =
 export const deleteRecipeActions = (recipes_id) => async (dispatch) => {
   try {
     const recipes = await axios.delete(
-      `http://192.168.22.142:7474/recipes/${recipes_id}`
+      `https://wild-tan-dog-kilt.cyclic.app/recipes/${recipes_id}`
     );
 
     alert("Delete Recipe Success");

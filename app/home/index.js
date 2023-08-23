@@ -19,7 +19,7 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://192.168.22.142:7474/recipes`)
+      .get(`https://wild-tan-dog-kilt.cyclic.app/recipes`)
       .then((res) => {
         setRecipes(res.data.data);
         // console.log(res.data.data);
@@ -35,7 +35,7 @@ const Home = () => {
 
   const fetchData = async () => {
     setIsRefreshing(true);
-    await axios.get(`http://192.168.22.142:7474/recipes`);
+    await axios.get(`https://wild-tan-dog-kilt.cyclic.app/recipes`);
     setIsRefreshing(false);
   };
 
