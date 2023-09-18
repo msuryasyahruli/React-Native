@@ -1,6 +1,6 @@
 <p align="center">
 <div align="center">
-  <img height="150" src="./documentaion/logo.png" alt="blanja-logo" border="0"/>
+  <img height="150" src="" alt="recipe-logo" border="0"/>
 </div>
   <h3 align="center">Mama Recipe</h3>
   <p align="center">
