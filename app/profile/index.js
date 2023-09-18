@@ -45,8 +45,8 @@ const Profile = () => {
                 <View style={styles.profileImg}>
                   <Image
                     style={{
-                      width: 120,
-                      height: 120,
+                      width: 100,
+                      height: 100,
                       borderRadius: 50,
                     }}
                     source={require("./profImg/user.png")}
