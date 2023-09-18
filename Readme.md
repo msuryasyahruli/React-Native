@@ -90,8 +90,8 @@ REACT_APP_API_KEY = [BACKEND_URL]
 
 <table>
   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="./scrnsht/Screenshot_1695049775.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./scrnsht/Screenshot_1695049762.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
     <td>Register</td>
@@ -99,8 +99,8 @@ REACT_APP_API_KEY = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="./scrnsht/Screenshot_1695048800.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./scrnsht/Screenshot_1695049113.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
     <td>Landing Page</td>
@@ -108,16 +108,16 @@ REACT_APP_API_KEY = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="./scrnsht/Screenshot_1695048841.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./scrnsht/Screenshot_1695049062.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
     <td>Create Food</td>
     <td>Edit Food</td>
   </tr>
   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="./scrnsht/Screenshot_1695049042.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./scrnsht/Screenshot_1695049054.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
     <td>Profile </td>
@@ -125,22 +125,22 @@ REACT_APP_API_KEY = [BACKEND_URL]
   </tr>
 
   <tr>
-    <td><img width="350px" src=""  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
+    <td><img width="350px" src="./scrnsht/Screenshot_1695049090.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="./scrnsht/Screenshot_1695049097.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
     <td>Saved Food</td>
     <td>Liked Food</td>
   </tr>
 
-  <tr>  
-    <!-- <td><img width="350px" src="./documentaion/search-result.png"  border="0" border="0" alt="1" /></td> -->
+  <!-- <tr>  
+    <td><img width="350px" src="./documentaion/search-result.png"  border="0" border="0" alt="1" /></td>
     <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
   <tr>
-    <!-- <td>Search Result</td> -->
+    <td>Search Result</td>
     <td>Recipe Video</td>
-  </tr>
+  </tr> -->
 
    <!-- <tr>
     <td><img width="350px" src="./documentaion/mobile/home.png"  border="0" border="0" alt="1" /></td>
