@@ -4,7 +4,7 @@
 </div>
   <h3 align="center">Mama Recipe</h3>
   <p align="center">
-    <a href=""><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/msuryasyahruli/recipe-mobile-app.git"><strong>Explore the docs »</strong></a>
     <br />
     <a href="">View Demo</a>
     <br />
@@ -58,13 +58,13 @@ This is an example of how to list things you need to use the software and how to
 - Clone This Front End Repo
 
 ```
-git clone 
+git clone https://github.com/msuryasyahruli/recipe-mobile-app.git
 ```
 
 - Go To Folder Repo
 
 ```
-cd 
+cd recipe-mobile-app
 ```
 
 - Install Module
@@ -132,24 +132,6 @@ REACT_APP_API_KEY = [BACKEND_URL]
     <td>Saved Food</td>
     <td>Liked Food</td>
   </tr>
-
-  <!-- <tr>  
-    <td><img width="350px" src="./documentaion/search-result.png"  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-  <tr>
-    <td>Search Result</td>
-    <td>Recipe Video</td>
-  </tr> -->
-
-   <!-- <tr>
-    <td><img width="350px" src="./documentaion/mobile/home.png"  border="0" border="0" alt="1" /></td>
-    <td> <img width="350px" src="./documentaion/mobile/profile.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
-  </tr>
-  <tr>
-    <td>Home - Mobile</td>
-    <td>Profile - Mobile</td>
-  </tr> -->
 </table>
 <!-- CONTRIBUTING -->
 
@@ -165,9 +147,9 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Mama Recipe`]()
+:rocket: [`Backend Mama Recipe`](https://github.com/msuryasyahruli/backend-recipe-app.git)
 
-:rocket: [`Frontend Mama Recipe`]()
+:rocket: [`Frontend Mama Recipe`](https://github.com/msuryasyahruli/recipe-mobile-app.git)
 
 :rocket: [`Demo Mama Recipe`]()
 
