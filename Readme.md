@@ -1,6 +1,6 @@
 <p align="center">
 <div align="center">
-  <img height="150" src="" alt="recipe-logo" border="0"/>
+  <img height="150" src="scrnsht\logo.png" alt="recipe-logo" border="0"/>
 </div>
   <h3 align="center">Mama Recipe</h3>
   <p align="center">
@@ -154,4 +154,4 @@ Contributions are what make the open source community such an amazing place to b
 :rocket: [`Demo Mama Recipe`]()
 
 Deployment Project Link: []()
-Original Project Link: []()
+Original Project Link: [https://github.com/msuryasyahruli/backend-recipe-app.git](https://github.com/msuryasyahruli/backend-recipe-app.git)
